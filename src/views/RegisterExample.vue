@@ -11,62 +11,62 @@
 
                 <!-- Sign In Form -->
                 <form @submit="postData" method="post">
-                  <label for="floatingInput">Full Name</label>
-                  <div class="form-floating mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="floatingInput"
-                      placeholder="write your name here"
-                      name="nama"
-                      v-model="posts.nama"
-                    />
-                  </div>
-                  <label for="floatingInput">Email Address</label>
-                  <div class="form-floating mb-3">
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="floatingInput"
-                      placeholder="write your email here"
-                      name="email"
-                      v-model="posts.email"
-                    />
-                  </div>
-                  <label for="floatingPassword">Password</label>
-                  <div class="form-floating mb-3">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="floatingPassword"
-                      placeholder="write your password here"
-                      name="password"
-                      v-model="posts.password"
-                    />
-                  </div>
-                  <label for="floatingPassword">Confirm Password</label>
-                  <div class="form-floating mb-3">
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="floatingPassword"
-                      placeholder="write your confirm password here"
-                    />
+                  <input-field
+                    textTitle="Full Name"
+                    id="nameInput"
+                    inputPlaceholder="write your name here"
+                    inputName="nama"
+                    v-model="posts.nama"
+                  />
+
+                  <input-field
+                    textTitle="Email Address"
+                    id="emailInput"
+                    inputPlaceholder="write your email here"
+                    inputName="email"
+                    inputType="email"
+                    v-model="posts.email"
+                  />
+
+                  <input-field
+                    textTitle="Password"
+                    id="passwordInput"
+                    inputPlaceholder="write your password here"
+                    inputName="password"
+                    inputType="password"
+                    v-model="posts.password"
+                  />
+
+                  <input-field
+                    textTitle="Confirm Password"
+                    id="passwordConfirmInput"
+                    inputPlaceholder="write your password confirm here"
+                    inputName="passwordConfirm"
+                    inputType="password"
+                  />
+
+                  <!-- <input-field
+                    textTitle="Role"
+                    id="roleInput"
+                    inputPlaceholder="write your role here"
+                    inputName="role"
+                    v-model.number="posts.role_id"
+                  /> -->
+
+                  <label>Select Role</label>
+                  <div>
+                    <select v-model="posts.role_id">
+                      <option
+                        v-for="(role, index) in roles"
+                        :value="role.id_role"
+                        :key="index"
+                      >
+                        {{ role.nama_role }}
+                      </option>
+                    </select>
                   </div>
 
-                  <label for="floatingRole">Role</label>
-                  <div class="form-floating mb-3">
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="floatingRole"
-                      placeholder="write your role here"
-                      name="role_id"
-                      v-model.number="posts.role_id"
-                    />
-                  </div>
-
-                  <div class="d-grid">
+                  <div class="d-grid mt-4">
                     <button
                       class="
                         btn btn-lg btn-primary btn-login
@@ -97,11 +97,17 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import InputField from "../components/InputField.vue";
 
 Vue.use(VueAxios, axios);
 
 export default {
   name: "RegisterExample",
+
+  components: {
+    InputField,
+  },
+
   data() {
     return {
       posts: {
@@ -110,7 +116,15 @@ export default {
         password: null,
         role_id: null,
       },
+      roles: [],
+      selected: {
+        role: "",
+      },
     };
+  },
+
+  mounted() {
+    this.getRoles();
   },
 
   methods: {
@@ -124,6 +138,14 @@ export default {
           console.warn(result);
         });
       e.preventDefault();
+    },
+
+    getRoles() {
+      this.axios
+        .get("https://golang-bookstore-rest-api.herokuapp.com/api/role/")
+        .then((response) => {
+          this.roles = response.data.data;
+        });
     },
   },
 };
