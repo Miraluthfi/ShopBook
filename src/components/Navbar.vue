@@ -25,6 +25,9 @@
           </template>
           <b-dropdown-item href="/Login">Log In</b-dropdown-item>
           <b-dropdown-item href="/Register">Create Account</b-dropdown-item>
+          <b-dropdown-item href="/register-example"
+            >Create Example Account</b-dropdown-item
+          >
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
@@ -37,5 +40,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
