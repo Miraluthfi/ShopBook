@@ -20,15 +20,6 @@
                       placeholder="write your name here"
                     />
                   </div>
-                  <label for="floatingInput">Phone Number</label>
-                  <div class="form-floating mb-3">
-                    <input
-                      type="num"
-                      class="form-control"
-                      id="floatingInput"
-                      placeholder="write your phone number here"
-                    />
-                  </div>
                   <label for="floatingInput">Email Address</label>
                   <div class="form-floating mb-3">
                     <input
