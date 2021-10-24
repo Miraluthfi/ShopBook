@@ -67,6 +67,10 @@
                   </div>
 
                   <div class="d-grid mt-4">
+                    <div v-if="error">Something Wrong</div>
+                    <div v-else-if="error === false">
+                      Success register data!
+                    </div>
                     <button
                       class="
                         btn btn-lg btn-primary btn-login
@@ -120,6 +124,7 @@ export default {
       selected: {
         role: "",
       },
+      error: null,
     };
   },
 
@@ -136,7 +141,9 @@ export default {
         )
         .then((result) => {
           console.warn(result);
-        });
+        })
+        .then(() => (this.error = false))
+        .catch((err) => (this.error = err));
       e.preventDefault();
     },
 
