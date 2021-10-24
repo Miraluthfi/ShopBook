@@ -136,7 +136,10 @@ export default {
   methods: {
     postData(e) {
       this.axios
-        .post(`${process.env.VUE_APP_BASE_URL}/api/auth/register`, this.posts)
+        .post(
+          "https://golang-bookstore-rest-api.herokuapp.com/api/auth/register",
+          this.posts
+        )
         .then((result) => {
           console.warn(result);
         })
@@ -147,7 +150,7 @@ export default {
 
     getRoles() {
       this.axios
-        .get(`${process.env.VUE_APP_BASE_URL}/api/role`)
+        .get("https://golang-bookstore-rest-api.herokuapp.com/api/role/")
         .then((response) => {
           this.roles = response.data.data;
         });
