@@ -64,13 +64,14 @@
                         {{ role.nama_role }}
                       </option>
                     </select>
-                  </div>
-
-                  <div class="d-grid mt-4">
-                    <div v-if="error">Something Wrong</div>
-                    <div v-else-if="error === false">
+                    <span v-if="error" class="ml-2 text-danger">
+                      Something Wrong
+                    </span>
+                    <span v-else-if="error === false" class="ml-2">
                       Success register data!
-                    </div>
+                    </span>
+                  </div>
+                  <div class="d-grid mt-4">
                     <button
                       class="
                         btn btn-lg btn-primary btn-login
